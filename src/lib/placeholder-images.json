@@ -1,0 +1,22 @@
+{
+  "placeholderImages": [
+    {
+      "id": "prod_1",
+      "description": "A cup of traditional colombian coffee",
+      "imageUrl": "https://images.unsplash.com/photo-1633627354173-1a26871e3204?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjb2xvbWJpYW4lMjBjb2ZmZWV8ZW58MHx8fHwxNzU5MzY0MDAyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "colombian coffee"
+    },
+    {
+      "id": "prod_2",
+      "description": "Traditional Colombian almojábana bread",
+      "imageUrl": "https://images.unsplash.com/photo-1509440159596-0249088772ff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhbG1vaiVDMyVBMWJhbmF8ZW58MHx8fHwxNzU5MzY0MDAyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "almojábana bread"
+    },
+    {
+      "id": "prod_3",
+      "description": "Delicious tres leches cake slice",
+      "imageUrl": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0cmVzJTIwbGVjaGVzJTIwY2FrZXxlbnwwfHx8fDE3NTkzNjQwMDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tres leches cake"
+    }
+  ]
+}

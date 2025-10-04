@@ -1,0 +1,562 @@
+{
+  "entities": {
+    "Product": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Product",
+      "type": "object",
+      "description": "Represents a product available for sale.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the product."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the product."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the product."
+        },
+        "sku": {
+          "type": "string",
+          "description": "Stock Keeping Unit, a unique identifier for inventory management."
+        },
+        "price": {
+          "type": "number",
+          "description": "Selling price of the product."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of the product image.",
+          "format": "uri"
+        },
+        "categoryId": {
+          "type": "string",
+          "description": "Reference to Category. (Relationship: Category 1:N Product)"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "sku",
+        "price",
+        "categoryId"
+      ]
+    },
+    "Category": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Category",
+      "type": "object",
+      "description": "Represents a category of products.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the category."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the category."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the category."
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "Inventory": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Inventory",
+      "type": "object",
+      "description": "Represents the inventory levels of a product.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the inventory record."
+        },
+        "productId": {
+          "type": "string",
+          "description": "Reference to Product. (Relationship: Product 1:1 Inventory)"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Current quantity of the product in stock."
+        },
+        "lowStockThreshold": {
+          "type": "number",
+          "description": "Threshold below which a low stock alert is triggered."
+        }
+      },
+      "required": [
+        "id",
+        "productId",
+        "quantity",
+        "lowStockThreshold"
+      ]
+    },
+    "Order": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Order",
+      "type": "object",
+      "description": "Represents a customer order.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the order."
+        },
+        "customerId": {
+          "type": "string",
+          "description": "Reference to Customer. (Relationship: Customer 1:N Order)"
+        },
+        "orderDate": {
+          "type": "string",
+          "description": "Date and time the order was placed.",
+          "format": "date-time"
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "Total amount of the order."
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the order (e.g., pending, processing, completed, cancelled)."
+        }
+      },
+      "required": [
+        "id",
+        "customerId",
+        "orderDate",
+        "totalAmount",
+        "status"
+      ]
+    },
+    "OrderItem": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "OrderItem",
+      "type": "object",
+      "description": "Represents an item within an order.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the order item."
+        },
+        "orderId": {
+          "type": "string",
+          "description": "Reference to Order. (Relationship: Order 1:N OrderItem)"
+        },
+        "productId": {
+          "type": "string",
+          "description": "Reference to Product. (Relationship: Product 1:N OrderItem)"
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity of the product in the order item."
+        },
+        "unitPrice": {
+          "type": "number",
+          "description": "Price of one unit of the product at the time of the order."
+        }
+      },
+      "required": [
+        "id",
+        "orderId",
+        "productId",
+        "quantity",
+        "unitPrice"
+      ]
+    },
+    "Customer": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Customer",
+      "type": "object",
+      "description": "Represents a customer.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the customer."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the customer."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the customer."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email address of the customer.",
+          "format": "email"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Phone number of the customer."
+        }
+      },
+      "required": [
+        "id",
+        "firstName",
+        "lastName",
+        "email"
+      ]
+    },
+    "SalesReport": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "SalesReport",
+      "type": "object",
+      "description": "Represents a sales report.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the sales report."
+        },
+        "reportDate": {
+          "type": "string",
+          "description": "Date the report was generated.",
+          "format": "date-time"
+        },
+        "periodStartDate": {
+          "type": "string",
+          "description": "Start date of the reporting period.",
+          "format": "date-time"
+        },
+        "periodEndDate": {
+          "type": "string",
+          "description": "End date of the reporting period.",
+          "format": "date-time"
+        },
+        "totalSales": {
+          "type": "number",
+          "description": "Total sales amount for the period."
+        }
+      },
+      "required": [
+        "id",
+        "reportDate",
+        "periodStartDate",
+        "periodEndDate",
+        "totalSales"
+      ]
+    },
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user of the system. This entity is intended to store non-authentication related user data. Authentication data should be handled by a dedicated auth system.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username of the user."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name of the user."
+        },
+        "roleId": {
+          "type": "string",
+          "description": "Reference to UserRole. (Relationship: UserRole 1:N User)"
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "firstName",
+        "lastName",
+        "roleId"
+      ]
+    },
+    "UserRole": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserRole",
+      "type": "object",
+      "description": "Represents a user role and its associated permissions.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user role."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the user role (e.g., Administrator, Vendor)."
+        },
+        "permissions": {
+          "type": "array",
+          "description": "List of permissions granted to this role.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "permissions"
+      ]
+    },
+    "RestaurantTable": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "RestaurantTable",
+      "type": "object",
+      "description": "Represents a table in a restaurant.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the restaurant table."
+        },
+        "tableNumber": {
+          "type": "string",
+          "description": "Table number or identifier."
+        },
+        "capacity": {
+          "type": "number",
+          "description": "Number of seats at the table."
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the table (e.g., available, occupied, reserved)."
+        }
+      },
+      "required": [
+        "id",
+        "tableNumber",
+        "capacity",
+        "status"
+      ]
+    },
+    "IntelligentSuggestion": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "IntelligentSuggestion",
+      "type": "object",
+      "description": "Represents a suggestion for reordering inventory based on AI analysis.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the suggestion."
+        },
+        "productId": {
+          "type": "string",
+          "description": "Reference to Product. (Relationship: Product 1:N IntelligentSuggestion)"
+        },
+        "suggestedQuantity": {
+          "type": "number",
+          "description": "Suggested quantity to reorder."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reasoning behind the suggestion (e.g., sales trend, seasonality)."
+        },
+        "suggestionDate": {
+          "type": "string",
+          "description": "Date the suggestion was generated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "productId",
+        "suggestedQuantity",
+        "reason",
+        "suggestionDate"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/products/{productId}",
+        "definition": {
+          "entityName": "Product",
+          "schema": {
+            "$ref": "#/backend/entities/Product"
+          },
+          "description": "Stores product information.",
+          "params": [
+            {
+              "name": "productId",
+              "description": "Unique identifier for the product."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/categories/{categoryId}",
+        "definition": {
+          "entityName": "Category",
+          "schema": {
+            "$ref": "#/backend/entities/Category"
+          },
+          "description": "Stores product categories.",
+          "params": [
+            {
+              "name": "categoryId",
+              "description": "Unique identifier for the category."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/inventories/{inventoryId}",
+        "definition": {
+          "entityName": "Inventory",
+          "schema": {
+            "$ref": "#/backend/entities/Inventory"
+          },
+          "description": "Stores inventory levels for each product.",
+          "params": [
+            {
+              "name": "inventoryId",
+              "description": "Unique identifier for the inventory record."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user profiles and related data.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "Unique identifier for the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/orders/{orderId}",
+        "definition": {
+          "entityName": "Order",
+          "schema": {
+            "$ref": "#/backend/entities/Order"
+          },
+          "description": "Stores order information. Each order is linked to a customer.",
+          "params": [
+            {
+              "name": "orderId",
+              "description": "Unique identifier for the order."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/order_items/{orderItemId}",
+        "definition": {
+          "entityName": "OrderItem",
+          "schema": {
+            "$ref": "#/backend/entities/OrderItem"
+          },
+          "description": "Stores individual items within an order.",
+          "params": [
+            {
+              "name": "orderItemId",
+              "description": "Unique identifier for the order item."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/customers/{customerId}",
+        "definition": {
+          "entityName": "Customer",
+          "schema": {
+            "$ref": "#/backend/entities/Customer"
+          },
+          "description": "Stores customer information.",
+          "params": [
+            {
+              "name": "customerId",
+              "description": "Unique identifier for the customer."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/sales_reports/{salesReportId}",
+        "definition": {
+          "entityName": "SalesReport",
+          "schema": {
+            "$ref": "#/backend/entities/SalesReport"
+          },
+          "description": "Stores sales reports.",
+          "params": [
+            {
+              "name": "salesReportId",
+              "description": "Unique identifier for the sales report."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/restaurant_tables/{tableId}",
+        "definition": {
+          "entityName": "RestaurantTable",
+          "schema": {
+            "$ref": "#/backend/entities/RestaurantTable"
+          },
+          "description": "Stores restaurant table information.",
+          "params": [
+            {
+              "name": "tableId",
+              "description": "Unique identifier for the restaurant table."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/intelligent_suggestions/{suggestionId}",
+        "definition": {
+          "entityName": "IntelligentSuggestion",
+          "schema": {
+            "$ref": "#/backend/entities/IntelligentSuggestion"
+          },
+          "description": "Stores intelligent suggestions for inventory reordering.",
+          "params": [
+            {
+              "name": "suggestionId",
+              "description": "Unique identifier for the suggestion."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/roles_admin/{userId}",
+        "definition": {
+          "entityName": "UserRole",
+          "schema": {
+            "$ref": "#/backend/entities/UserRole"
+          },
+          "description": "Documents in this collection indicate administrative privileges. Existence of a document signifies admin role.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "User ID of the administrator."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to support the CommerceFlow application's core features, including POS interface, inventory management, order management, delivery platform integration, sales reporting, intelligent suggestions, and user role management. It prioritizes authorization independence, clarity, and security, avoiding hierarchical authorization dependencies. All collections are designed with homogeneous security postures.\n\n*   **Authorization Independence**: Achieved through denormalization. For instance, User roles could be stored directly within User documents if the roles are simple, or in a dedicated subcollection if the role structure is complex. Collaborative data, if needed, uses a `members` map.\n*   **QAPs (Rules are not Filters)**: Segregation is used extensively to support secure `list` operations. Private user data is stored under `/users/{userId}`, while global data like `/products` are stored separately. Role-based access is managed via existence checks in dedicated collections like `/roles_admin/{uid}`.\n\n*   `/products`: Stores product information. Categories are referenced by `categoryId`.\n*   `/categories`: Stores product categories.\n*   `/inventories`: Stores inventory levels for each product.\n*   `/users/{userId}`: Stores user profiles and related data.\n*   `/orders/{orderId}`: Stores order information. Each order is linked to a customer.\n*   `/order_items/{orderItemId}`: Stores individual items within an order.\n*   `/customers/{customerId}`: Stores customer information.\n*   `/sales_reports/{salesReportId}`: Stores sales reports.\n*   `/restaurant_tables/{tableId}`: Stores restaurant table information.\n*   `/intelligent_suggestions/{suggestionId}`: Stores intelligent suggestions for inventory reordering.\n*   `/roles_admin/{userId}`: Documents in this collection indicate administrative privileges. Existence of a document signifies admin role.\n\nThis structure allows for efficient querying, easy maintenanc... [truncated]"
+  }
+}

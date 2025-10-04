@@ -293,7 +293,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 
 **⭐ Si este proyecto te es útil, considera darle una estrella ⭐**
 
-**Hecho con ❤️ para la comunidad colombiana**
+**Desarrollado con ❤️ usando Next.js, TypeScript, Firebase, Tailwind CSS, shadcn/ui, mucho Té Negro 🍵 y HardTechno 🎵**
 
 </div>
 

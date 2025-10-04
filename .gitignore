@@ -178,3 +178,4 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+node_modules
